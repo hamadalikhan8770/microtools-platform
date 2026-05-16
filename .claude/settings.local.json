@@ -1,0 +1,18 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(git init *)",
+      "Bash(npx create-next-app@latest . --typescript --tailwind --eslint --app --no-git --import-alias \"@/*\" --src-dir=false)",
+      "Bash(npm install *)",
+      "Bash(npm run *)",
+      "Read(//tmp/**)",
+      "Bash(gh auth *)",
+      "Bash(gh repo *)",
+      "mcp__Claude_Preview__preview_start",
+      "mcp__a52c188e-41fa-4c73-9044-173e0a0a8708__deploy_to_vercel",
+      "Bash(vercel --version)",
+      "Bash(git add *)",
+      "Bash(git commit *)"
+    ]
+  }
+}
