@@ -9,7 +9,7 @@ export default function robots(): MetadataRoute.Robots {
         disallow: ['/admin', '/api/private'],
       },
     ],
-    sitemap: 'https://microtools.io/sitemap.xml',
-    host: 'https://microtools.io',
+    sitemap: 'https://www.microtoolshub.org/sitemap.xml',
+    host: 'https://www.microtoolshub.org',
   }
 }

@@ -15,7 +15,7 @@ export default function PrivacyPage() {
         <section>
           <h2 className="text-2xl font-bold text-foreground mb-3">Introduction</h2>
           <p>
-            MicroTools ("we", "our", or "us") operates the microtools.io website and service. This page informs you of our policies regarding the collection, use, and disclosure of personal data when you use our service.
+            MicroTools ("we", "our", or "us") operates the www.microtoolshub.org website and service. This page informs you of our policies regarding the collection, use, and disclosure of personal data when you use our service.
           </p>
         </section>
         <section>

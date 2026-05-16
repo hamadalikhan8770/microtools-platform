@@ -29,9 +29,9 @@ export default async function ToolPage({ params }: ToolPageProps) {
 
   const toolSchema = generateToolSchema(toolMetadata)
   const breadcrumbSchema = generateBreadcrumbSchema([
-    { name: 'Home', url: 'https://microtools.io' },
-    { name: category.name, url: `https://microtools.io/tools/${category.slug}` },
-    { name: tool.name, url: `https://microtools.io/tools/${category.slug}/${tool.slug}` },
+    { name: 'Home', url: 'https://www.microtoolshub.org' },
+    { name: category.name, url: `https://www.microtoolshub.org/tools/${category.slug}` },
+    { name: tool.name, url: `https://www.microtoolshub.org/tools/${category.slug}/${tool.slug}` },
   ])
   const faqSchema = tool.faqs && tool.faqs.length > 0 ? generateFAQSchema(tool.faqs) : null
 

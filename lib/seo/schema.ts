@@ -5,8 +5,8 @@ export function generateOrganizationSchema(): SchemaType {
     '@context': 'https://schema.org',
     '@type': 'Organization',
     name: 'MicroTools',
-    url: 'https://microtools.io',
-    logo: 'https://microtools.io/logo.png',
+    url: 'https://www.microtoolshub.org',
+    logo: 'https://www.microtoolshub.org/logo.png',
     description: 'Complete suite of free online tools for health, finance, SEO, and development.',
     sameAs: [
       'https://twitter.com/microtools',
@@ -21,13 +21,13 @@ export function generateWebsiteSchema(): SchemaType {
     '@context': 'https://schema.org',
     '@type': 'WebSite',
     name: 'MicroTools',
-    url: 'https://microtools.io',
+    url: 'https://www.microtoolshub.org',
     description: 'Free online tools for various calculations and conversions',
     potentialAction: {
       '@type': 'SearchAction',
       target: {
         '@type': 'EntryPoint',
-        urlTemplate: 'https://microtools.io?search={search_term_string}',
+        urlTemplate: 'https://www.microtoolshub.org?search={search_term_string}',
       },
       'query-input': 'required name=search_term_string',
     },
@@ -49,7 +49,7 @@ export function generateToolSchema(
     name: tool.name,
     description: tool.description,
     applicationCategory: 'Utility',
-    url: `https://microtools.io/tools/${tool.category}/${tool.slug}`,
+    url: `https://www.microtoolshub.org/tools/${tool.category}/${tool.slug}`,
     offers: {
       '@type': 'Offer',
       price: '0',
@@ -102,7 +102,7 @@ export function generateArticleSchema(article: {
     '@type': 'BlogPosting',
     headline: article.title,
     description: article.description,
-    image: article.image || 'https://microtools.io/og-image.png',
+    image: article.image || 'https://www.microtoolshub.org/og-image.png',
     datePublished: article.publishedDate,
     dateModified: article.modifiedDate,
     author: {
@@ -114,7 +114,7 @@ export function generateArticleSchema(article: {
       name: 'MicroTools',
       logo: {
         '@type': 'ImageObject',
-        url: 'https://microtools.io/logo.png',
+        url: 'https://www.microtoolshub.org/logo.png',
       },
     },
   }

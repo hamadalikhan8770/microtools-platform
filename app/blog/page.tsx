@@ -11,7 +11,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'Blog - MicroTools',
     description: 'Read articles about health, finance, SEO, and developer tools.',
-    url: 'https://microtools.io/blog',
+    url: 'https://www.microtoolshub.org/blog',
     type: 'website',
   },
 }
@@ -23,7 +23,7 @@ function generateBlogCollectionSchema() {
     '@type': 'CollectionPage',
     name: 'MicroTools Blog',
     description: 'Articles about health, finance, SEO, and developer tools',
-    url: 'https://microtools.io/blog',
+    url: 'https://www.microtoolshub.org/blog',
     mainEntity: {
       '@type': 'ItemList',
       itemListElement: posts.slice(0, 5).map((post, idx) => ({
@@ -31,7 +31,7 @@ function generateBlogCollectionSchema() {
         position: idx + 1,
         headline: post.title,
         description: post.description,
-        url: `https://microtools.io/blog/${post.slug}`,
+        url: `https://www.microtoolshub.org/blog/${post.slug}`,
         datePublished: post.publishedDate,
         dateModified: post.modifiedDate,
       })),

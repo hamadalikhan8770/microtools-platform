@@ -34,8 +34,8 @@ export async function generateMetadata({ params }: BlogDetailPageProps): Promise
       modifiedTime: post.modifiedDate,
       authors: [post.author],
       tags: post.tags,
-      url: `https://microtools.io/blog/${post.slug}`,
-      images: [{ url: post.image || 'https://microtools.io/og-image.png' }],
+      url: `https://www.microtoolshub.org/blog/${post.slug}`,
+      images: [{ url: post.image || 'https://www.microtoolshub.org/og-image.png' }],
     },
   }
 }

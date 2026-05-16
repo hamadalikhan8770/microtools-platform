@@ -6,16 +6,16 @@ import Script from 'next/script'
 export const metadata: Metadata = {
   title: 'MicroTools - Free Online Tools Suite',
   description: 'Complete suite of free online tools for health, finance, SEO, and development. 60+ calculators and converters.',
-  metadataBase: new URL('https://microtools.io'),
+  metadataBase: new URL('https://www.microtoolshub.org'),
   openGraph: {
     type: 'website',
     locale: 'en_US',
-    url: 'https://microtools.io',
+    url: 'https://www.microtoolshub.org',
     title: 'MicroTools - Free Online Tools Suite',
     description: 'Complete suite of free online tools for health, finance, SEO, and development.',
     images: [
       {
-        url: 'https://microtools.io/og-image.png',
+        url: 'https://www.microtoolshub.org/og-image.png',
         width: 1200,
         height: 630,
         alt: 'MicroTools',
@@ -26,7 +26,7 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: 'MicroTools - Free Online Tools Suite',
     description: 'Complete suite of free online tools for health, finance, SEO, and development.',
-    images: ['https://microtools.io/og-image.png'],
+    images: ['https://www.microtoolshub.org/og-image.png'],
   },
   robots: {
     index: true,
@@ -43,7 +43,7 @@ export default function RootLayout({
     <html lang="en" suppressHydrationWarning>
       <head>
         <link rel="icon" href="/favicon.ico" />
-        <link rel="canonical" href="https://microtools.io" />
+        <link rel="canonical" href="https://www.microtoolshub.org" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <meta httpEquiv="x-ua-compatible" content="ie=edge" />
         {/* Google Analytics */}

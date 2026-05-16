@@ -22,7 +22,7 @@ export async function generateMetadata({ params }: CategoryPageProps): Promise<M
     openGraph: {
       title: `${category.name} Tools - MicroTools`,
       description: `Free ${category.name.toLowerCase()} tools and calculators.`,
-      url: `https://microtools.io/tools/${categorySlug}`,
+      url: `https://www.microtoolshub.org/tools/${categorySlug}`,
     },
   }
 }
