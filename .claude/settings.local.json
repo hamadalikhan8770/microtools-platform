@@ -12,7 +12,8 @@
       "mcp__a52c188e-41fa-4c73-9044-173e0a0a8708__deploy_to_vercel",
       "Bash(vercel --version)",
       "Bash(git add *)",
-      "Bash(git commit *)"
+      "Bash(git commit *)",
+      "Bash(vercel deploy *)"
     ]
   }
 }

@@ -1,4 +1,5 @@
 import { Metadata } from 'next'
+import { createElement } from 'react'
 import Link from 'next/link'
 import { getBlogPost, getAllBlogPosts, getRelatedBlogPosts, formatDate } from '@/lib/blog/utils'
 import { SchemaMarkup } from '@/components/common/SchemaMarkup'
@@ -105,12 +106,9 @@ export default async function BlogDetailPage({ params }: BlogDetailPageProps) {
               if (paragraph.startsWith('#')) {
                 const level = paragraph.match(/^#+/)?.[0].length || 1
                 const text = paragraph.replace(/^#+\s/, '')
-                const HeadingTag = `h${Math.min(level + 1, 6)}` as const
-                return (
-                  <HeadingTag key={idx} className="mt-8 mb-4">
-                    {text}
-                  </HeadingTag>
-                )
+                const headingLevel = Math.min(level + 1, 6)
+                const tagName = `h${headingLevel}` as const
+                return createElement(tagName, { key: idx, className: 'mt-8 mb-4' }, text)
               }
 
               if (paragraph.startsWith('-') || paragraph.startsWith('*')) {

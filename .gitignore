@@ -20,3 +20,5 @@ coverage
 *.swp
 *.swo
 *~
+
+.vercel
