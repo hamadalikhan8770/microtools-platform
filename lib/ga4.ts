@@ -118,10 +118,3 @@ export function trackEngagement(engagementType: string, duration?: number) {
     duration_seconds: duration || 0,
   })
 }
-
-// Declare gtag global type
-declare global {
-  interface Window {
-    gtag: (command: string, ...args: any[]) => void
-  }
-}
