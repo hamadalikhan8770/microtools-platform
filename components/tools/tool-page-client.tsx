@@ -1,8 +1,11 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { Copy, Share2 } from 'lucide-react'
 import type { Tool } from '@/types/tool'
+import { trackToolUsage, trackToolCalculation, trackClick } from '@/lib/ga4'
+import { useAnalytics } from '@/lib/hooks/useAnalytics'
+import { useScrollDepth } from '@/lib/hooks/useScrollDepth'
 
 type ToolMetadata = Omit<Tool, 'calculate'>
 
@@ -20,6 +23,13 @@ export function ToolPageClient({ tool, category, onCalculate }: ToolPageClientPr
   const [explanation, setExplanation] = useState<string>('')
   const [isLoadingExplanation, setIsLoadingExplanation] = useState(false)
 
+  useAnalytics()
+  useScrollDepth()
+
+  useEffect(() => {
+    trackToolUsage(tool.name, category.name, Object.keys(inputs).length)
+  }, [tool.name, category.name, inputs])
+
   const handleInputChange = (name: string, value: any) => {
     setInputs(prev => ({ ...prev, [name]: value }))
   }
@@ -31,6 +41,9 @@ export function ToolPageClient({ tool, category, onCalculate }: ToolPageClientPr
       setExplanation('')
       const result = await onCalculate(inputs)
       setResult(result)
+
+      trackClick('Calculate', 'button', 'tool-page')
+      trackToolCalculation(tool.name, category.name, result.outputs[0]?.label || 'calculation')
 
       // Generate AI explanation
       setIsLoadingExplanation(true)
@@ -61,9 +74,15 @@ export function ToolPageClient({ tool, category, onCalculate }: ToolPageClientPr
 
   const handleCopyResult = () => {
     if (result) {
+      trackClick('Copy Results', 'button', 'tool-page')
       const text = result.outputs.map((o: any) => `${o.label}: ${o.value} ${o.unit || ''}`).join('\n')
       navigator.clipboard.writeText(text)
     }
+  }
+
+  const handleShare = () => {
+    trackClick('Share', 'button', 'tool-page')
+    navigator.share?.({ title: tool.name, text: `Check out ${tool.name}` })
   }
 
   return (
@@ -185,7 +204,7 @@ export function ToolPageClient({ tool, category, onCalculate }: ToolPageClientPr
                     Copy
                   </button>
                   <button
-                    onClick={() => navigator.share?.({ title: tool.name, text: `Check out ${tool.name}` })}
+                    onClick={handleShare}
                     className="flex-1 flex items-center justify-center gap-2 px-4 py-2 border border-border rounded-lg hover:bg-secondary transition-colors"
                   >
                     <Share2 className="w-4 h-4" />

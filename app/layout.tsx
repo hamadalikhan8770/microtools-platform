@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import { Providers } from '@/components/layout/providers'
 import '@/styles/globals.css'
 import Script from 'next/script'
+import { GA_MEASUREMENT_ID } from '@/lib/ga4'
 
 export const metadata: Metadata = {
   title: 'MicroTools - Free Online Tools Suite',
@@ -46,23 +47,28 @@ export default function RootLayout({
         <link rel="canonical" href="https://www.microtoolshub.org" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <meta httpEquiv="x-ua-compatible" content="ie=edge" />
-        {/* Google Analytics */}
-        {process.env.NEXT_PUBLIC_GA_ID && (
+        {/* Google Analytics 4 */}
+        {GA_MEASUREMENT_ID && (
           <>
             <Script
               strategy="afterInteractive"
-              src={`https://www.googletagmanager.com/gtag/js?id=${process.env.NEXT_PUBLIC_GA_ID}`}
+              src={`https://www.googletagmanager.com/gtag/js?id=${GA_MEASUREMENT_ID}`}
+              async
             />
             <Script
-              id="google-analytics"
+              id="google-analytics-init"
               strategy="afterInteractive"
               dangerouslySetInnerHTML={{
                 __html: `
                   window.dataLayer = window.dataLayer || [];
                   function gtag(){dataLayer.push(arguments);}
                   gtag('js', new Date());
-                  gtag('config', '${process.env.NEXT_PUBLIC_GA_ID}', {
+                  gtag('config', '${GA_MEASUREMENT_ID}', {
                     page_path: window.location.pathname,
+                    page_title: document.title,
+                    anonymize_ip: true,
+                    allow_google_signals: true,
+                    allow_ad_personalization_signals: true,
                   });
                 `,
               }}

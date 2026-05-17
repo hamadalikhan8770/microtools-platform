@@ -13,7 +13,13 @@
       "Bash(vercel --version)",
       "Bash(git add *)",
       "Bash(git commit *)",
-      "Bash(vercel deploy *)"
+      "Bash(vercel deploy *)",
+      "Bash(vercel domains *)",
+      "mcp__Claude_in_Chrome__browser_batch",
+      "mcp__Claude_in_Chrome__computer",
+      "Bash(nslookup www.microtoolshub.org)",
+      "Bash(nslookup microtoolshub.org)",
+      "Bash(curl -I https://www.microtoolshub.org)"
     ]
   }
 }
