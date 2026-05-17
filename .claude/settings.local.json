@@ -19,7 +19,8 @@
       "mcp__Claude_in_Chrome__computer",
       "Bash(nslookup www.microtoolshub.org)",
       "Bash(nslookup microtoolshub.org)",
-      "Bash(curl -I https://www.microtoolshub.org)"
+      "Bash(curl -I https://www.microtoolshub.org)",
+      "Bash(git push *)"
     ]
   }
 }

@@ -28,13 +28,14 @@ export function ToolPageClient({ tool, category, onCalculate }: ToolPageClientPr
 
   useEffect(() => {
     trackToolUsage(tool.name, category.name, Object.keys(inputs).length)
-  }, [tool.name, category.name, inputs])
+  }, [tool.name, category.name])
 
   const handleInputChange = (name: string, value: any) => {
     setInputs(prev => ({ ...prev, [name]: value }))
   }
 
   const handleCalculate = async () => {
+    trackClick('Calculate', 'button', 'tool-page')
     try {
       setError('')
       setIsLoading(true)
@@ -42,7 +43,6 @@ export function ToolPageClient({ tool, category, onCalculate }: ToolPageClientPr
       const result = await onCalculate(inputs)
       setResult(result)
 
-      trackClick('Calculate', 'button', 'tool-page')
       trackToolCalculation(tool.name, category.name, result.outputs[0]?.label || 'calculation')
 
       // Generate AI explanation

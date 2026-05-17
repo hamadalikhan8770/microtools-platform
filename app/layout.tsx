@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
 import { Providers } from '@/components/layout/providers'
+import { GA4DebugInitializer } from '@/components/analytics/GA4DebugInitializer'
 import '@/styles/globals.css'
 import Script from 'next/script'
 import { GA_MEASUREMENT_ID } from '@/lib/ga4'
@@ -47,7 +48,25 @@ export default function RootLayout({
         <link rel="canonical" href="https://www.microtoolshub.org" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <meta httpEquiv="x-ua-compatible" content="ie=edge" />
-        {/* Google Analytics 4 */}
+        {/* Google Analytics 4 - Consent default and initialization */}
+        <Script
+          id="ga4-consent-init"
+          strategy="beforeInteractive"
+          dangerouslySetInnerHTML={{
+            __html: `
+              window.dataLayer = window.dataLayer || [];
+              function gtag(){dataLayer.push(arguments);}
+              gtag('consent', 'default', {
+                analytics_storage: 'denied',
+                ad_storage: 'denied',
+                ad_user_data: 'denied',
+                ad_personalization: 'denied',
+              });
+            `,
+          }}
+        />
+
+        {/* Google Analytics 4 - Main tracking */}
         {GA_MEASUREMENT_ID && (
           <>
             <Script
@@ -60,8 +79,7 @@ export default function RootLayout({
               strategy="afterInteractive"
               dangerouslySetInnerHTML={{
                 __html: `
-                  window.dataLayer = window.dataLayer || [];
-                  function gtag(){dataLayer.push(arguments);}
+                  function gtag(){window.dataLayer.push(arguments);}
                   gtag('js', new Date());
                   gtag('config', '${GA_MEASUREMENT_ID}', {
                     page_path: window.location.pathname,
@@ -70,13 +88,21 @@ export default function RootLayout({
                     allow_google_signals: true,
                     allow_ad_personalization_signals: true,
                   });
+                  gtag('consent', 'update', {
+                    analytics_storage: 'granted',
+                    ad_storage: 'granted',
+                    ad_user_data: 'granted',
+                    ad_personalization: 'granted',
+                  });
                 `,
               }}
             />
+
           </>
         )}
       </head>
       <body>
+        <GA4DebugInitializer />
         <Providers>{children}</Providers>
       </body>
     </html>
