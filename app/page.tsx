@@ -1,5 +1,6 @@
 import { Metadata } from 'next'
 import { ToolCard } from '@/components/tools/tool-card'
+import { AdUnit } from '@/components/ads/AdUnit'
 import { tools, categories, getFeaturedTools } from '@/lib/tools'
 import { SchemaMarkup } from '@/components/common/SchemaMarkup'
 import { generateOrganizationSchema, generateWebsiteSchema } from '@/lib/seo/schema'
@@ -61,6 +62,11 @@ export default function Home() {
             </a>
           ))}
         </div>
+
+        {/* Homepage Ad - Below Categories */}
+        <div className="mb-20 bg-secondary/30 rounded-2xl p-6 border border-border">
+          <AdUnit slotId="1234567890" format="auto" responsive={true} minHeight="250px" />
+        </div>
       </div>
 
       {/* Featured Tools */}
@@ -93,6 +99,11 @@ export default function Home() {
               <p className="text-muted-foreground">{feature.desc}</p>
             </div>
           ))}
+        </div>
+
+        {/* Homepage Ad - After Features */}
+        <div className="mt-20 bg-secondary/30 rounded-2xl p-6 border border-border">
+          <AdUnit slotId="1234567891" format="auto" responsive={true} minHeight="250px" />
         </div>
       </div>
 

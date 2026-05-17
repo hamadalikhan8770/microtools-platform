@@ -1,6 +1,7 @@
 import { Metadata } from 'next'
 import { createElement } from 'react'
 import Link from 'next/link'
+import { AdUnit } from '@/components/ads/AdUnit'
 import { getBlogPost, getAllBlogPosts, getRelatedBlogPosts, formatDate } from '@/lib/blog/utils'
 import { SchemaMarkup } from '@/components/common/SchemaMarkup'
 import { generateArticleSchema } from '@/lib/seo/schema'
@@ -112,6 +113,11 @@ export default async function BlogDetailPage({ params }: BlogDetailPageProps) {
             <span className="text-9xl">{categoryColor.emoji}</span>
           </div>
 
+          {/* Blog Page Ad - After Featured Image */}
+          <div className="mb-12 bg-secondary/30 rounded-2xl p-6 border border-border">
+            <AdUnit slotId="1234567894" format="auto" responsive={true} minHeight="250px" />
+          </div>
+
           <div className="prose prose-invert max-w-none mb-12">
             {post.content.split('\n\n').map((paragraph, idx) => {
               if (paragraph.startsWith('#')) {
@@ -167,6 +173,11 @@ export default async function BlogDetailPage({ params }: BlogDetailPageProps) {
               </div>
             </div>
           )}
+
+          {/* Blog Page Ad - After Article Content */}
+          <div className="my-12 bg-secondary/30 rounded-2xl p-6 border border-border">
+            <AdUnit slotId="1234567895" format="auto" responsive={true} minHeight="250px" />
+          </div>
         </article>
 
         {related.length > 0 && (

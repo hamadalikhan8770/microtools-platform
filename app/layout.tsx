@@ -1,9 +1,11 @@
 import type { Metadata } from 'next'
 import { Providers } from '@/components/layout/providers'
 import { GA4DebugInitializer } from '@/components/analytics/GA4DebugInitializer'
+import { CookieConsent } from '@/components/common/CookieConsent'
 import '@/styles/globals.css'
 import Script from 'next/script'
 import { GA_MEASUREMENT_ID } from '@/lib/ga4'
+import { ADSENSE_CONFIG } from '@/lib/adsense'
 
 export const metadata: Metadata = {
   title: 'MicroTools - Free Online Tools Suite',
@@ -97,13 +99,23 @@ export default function RootLayout({
                 `,
               }}
             />
-
           </>
+        )}
+
+        {/* Google AdSense */}
+        {ADSENSE_CONFIG.publisherId && (
+          <Script
+            strategy="afterInteractive"
+            async
+            src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${ADSENSE_CONFIG.publisherId}`}
+            crossOrigin="anonymous"
+          />
         )}
       </head>
       <body>
         <GA4DebugInitializer />
         <Providers>{children}</Providers>
+        <CookieConsent />
       </body>
     </html>
   )

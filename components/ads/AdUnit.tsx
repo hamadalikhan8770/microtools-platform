@@ -1,39 +1,50 @@
 'use client'
 
 import { useEffect } from 'react'
+import { ADSENSE_CONFIG, isAdSenseConfigured } from '@/lib/adsense'
 
 interface AdUnitProps {
-  slotId: string
+  slotId?: string
   format?: 'auto' | 'horizontal' | 'vertical' | 'rectangle'
   responsive?: boolean
   className?: string
+  minHeight?: string
 }
 
-export function AdUnit({ slotId, format = 'auto', responsive = true, className = '' }: AdUnitProps) {
+export function AdUnit({
+  slotId = '1234567890',
+  format = 'auto',
+  responsive = true,
+  className = '',
+  minHeight = '100px',
+}: AdUnitProps) {
   useEffect(() => {
-    // Load Google AdSense script if not already loaded
-    if (typeof window !== 'undefined' && !window.adsbygoogle) {
-      const script = document.createElement('script')
-      script.async = true
-      script.src = 'https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-xxxxxxxxxxxxxxxx'
-      script.onload = () => {
-        ;(window.adsbygoogle = window.adsbygoogle || []).push({})
-      }
-      document.head.appendChild(script)
-    } else if (window.adsbygoogle) {
+    if (!isAdSenseConfigured()) {
+      return
+    }
+
+    try {
       ;(window.adsbygoogle = window.adsbygoogle || []).push({})
+    } catch (error) {
+      console.error('[AdSense] Error loading ad unit:', error)
     }
   }, [])
 
+  if (!isAdSenseConfigured()) {
+    return null
+  }
+
+  const publisherId = ADSENSE_CONFIG.publisherId
+
   return (
-    <div className={`ad-unit ${className}`}>
+    <div className={`ad-container ${className}`} style={{ minHeight }}>
       <ins
         className="adsbygoogle"
         style={{
-          display: responsive ? 'block' : 'inline-block',
+          display: 'block',
           textAlign: 'center',
         }}
-        data-ad-client="ca-pub-xxxxxxxxxxxxxxxx"
+        data-ad-client={publisherId}
         data-ad-slot={slotId}
         data-ad-format={format}
         data-full-width-responsive={responsive}
@@ -44,6 +55,6 @@ export function AdUnit({ slotId, format = 'auto', responsive = true, className =
 
 declare global {
   interface Window {
-    adsbygoogle: any
+    adsbygoogle?: any[]
   }
 }

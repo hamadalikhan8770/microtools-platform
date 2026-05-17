@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react'
 import { Copy, Share2 } from 'lucide-react'
+import { AdUnit } from '@/components/ads/AdUnit'
 import type { Tool } from '@/types/tool'
 import { trackToolUsage, trackToolCalculation, trackClick } from '@/lib/ga4'
 import { useAnalytics } from '@/lib/hooks/useAnalytics'
@@ -213,6 +214,11 @@ export function ToolPageClient({ tool, category, onCalculate }: ToolPageClientPr
                 </div>
               </div>
 
+              {/* Tool Page Ad - After Results */}
+              <div className="bg-secondary/30 rounded-2xl p-4 border border-border">
+                <AdUnit slotId="1234567892" format="auto" responsive={true} minHeight="200px" />
+              </div>
+
               {/* AI Explanation */}
               {isLoadingExplanation && (
                 <div className="bg-card border border-border rounded-2xl p-6">
@@ -292,6 +298,11 @@ export function ToolPageClient({ tool, category, onCalculate }: ToolPageClientPr
                 <p className="mt-3 text-muted-foreground text-sm">{faq.a}</p>
               </details>
             ))}
+          </div>
+
+          {/* Tool Page Ad - After FAQs */}
+          <div className="mt-12 bg-secondary/30 rounded-2xl p-6 border border-border">
+            <AdUnit slotId="1234567893" format="auto" responsive={true} minHeight="250px" />
           </div>
         </div>
       )}

@@ -27,13 +27,46 @@ export default function PrivacyPage() {
         <section>
           <h2 className="text-2xl font-bold text-foreground mb-3">Analytics</h2>
           <p>
-            We use Google Analytics to understand how users interact with our platform. This helps us improve our services. No sensitive personal information is collected.
+            We use Google Analytics to understand how users interact with our platform. This helps us improve our services. No sensitive personal information is collected. You can opt-out by installing the{' '}
+            <a
+              href="https://tools.google.com/dlpage/gaoptout"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-blue-400 hover:text-blue-300 underline"
+            >
+              Google Analytics Opt-out Browser Add-on
+            </a>
+            .
+          </p>
+        </section>
+        <section>
+          <h2 className="text-2xl font-bold text-foreground mb-3">Advertising (Google AdSense)</h2>
+          <p>
+            We use Google AdSense to serve advertisements on our service. Google AdSense uses cookies and similar technologies to display personalized ads, track ad performance, and prevent ad fraud.
+          </p>
+          <p className="mt-3">
+            You can control personalized ads by visiting{' '}
+            <a
+              href="https://www.google.com/settings/ads"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-blue-400 hover:text-blue-300 underline"
+            >
+              Google Ads Settings
+            </a>
+            .
+          </p>
+        </section>
+        <section>
+          <h2 className="text-2xl font-bold text-foreground mb-3">Cookies</h2>
+          <p>
+            We use cookies and similar tracking technologies to track activity on our service. You can instruct your browser to refuse all cookies or to indicate when a cookie is being sent. Most browsers automatically accept cookies, but you can usually modify your browser settings to decline cookies if you prefer.
           </p>
         </section>
         <section>
           <h2 className="text-2xl font-bold text-foreground mb-3">Your Rights</h2>
           <p>
-            You have the right to access, update, or delete your personal information at any time. Contact us for any privacy-related questions.
+            You have the right to access, update, or delete your personal information at any time. Contact us for any privacy-related questions. If you are in the European Union, you have rights under GDPR including the right to data portability and erasure.
           </p>
         </section>
       </div>
