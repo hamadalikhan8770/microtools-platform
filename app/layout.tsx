@@ -103,14 +103,12 @@ export default function RootLayout({
         )}
 
         {/* Google AdSense */}
-        {ADSENSE_CONFIG.publisherId && (
-          <Script
-            strategy="afterInteractive"
-            async
-            src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${ADSENSE_CONFIG.publisherId}`}
-            crossOrigin="anonymous"
-          />
-        )}
+        <Script
+          strategy="afterInteractive"
+          async
+          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8678434817041467"
+          crossOrigin="anonymous"
+        />
       </head>
       <body>
         <GA4DebugInitializer />
