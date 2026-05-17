@@ -39,6 +39,17 @@ function generateBlogCollectionSchema() {
   }
 }
 
+const getCategoryColor = (category: string) => {
+  const colors: Record<string, { bg: string; text: string; emoji: string }> = {
+    health: { bg: 'bg-red-500/20', text: 'text-red-400', emoji: '🏥' },
+    finance: { bg: 'bg-green-500/20', text: 'text-green-400', emoji: '💰' },
+    seo: { bg: 'bg-blue-500/20', text: 'text-blue-400', emoji: '🔍' },
+    developer: { bg: 'bg-purple-500/20', text: 'text-purple-400', emoji: '👨‍💻' },
+    converter: { bg: 'bg-orange-500/20', text: 'text-orange-400', emoji: '🔄' },
+  }
+  return colors[category] || { bg: 'bg-slate-500/20', text: 'text-slate-400', emoji: '📝' }
+}
+
 export default function BlogPage() {
   const posts = getAllBlogPosts()
   const schema = generateBlogCollectionSchema()
@@ -55,22 +66,18 @@ export default function BlogPage() {
         </div>
 
         <div className="space-y-8">
-          {posts.map((post) => (
+          {posts.map((post) => {
+            const categoryColor = getCategoryColor(post.category)
+            return (
             <article
               key={post.id}
               className="group border-b border-border pb-8 hover:opacity-80 transition-opacity"
             >
               <Link href={`/blog/${post.slug}`}>
                 <div className="flex gap-6 cursor-pointer">
-                  {post.image && (
-                    <div className="flex-shrink-0 w-48 h-32 bg-card rounded-lg overflow-hidden">
-                      <img
-                        src={post.image}
-                        alt={post.title}
-                        className="w-full h-full object-cover group-hover:scale-105 transition-transform"
-                      />
-                    </div>
-                  )}
+                  <div className={`flex-shrink-0 w-48 h-32 ${categoryColor.bg} rounded-lg overflow-hidden flex items-center justify-center`}>
+                    <span className="text-6xl">{categoryColor.emoji}</span>
+                  </div>
 
                   <div className="flex-grow">
                     <div className="flex items-center gap-3 mb-2">
@@ -96,7 +103,8 @@ export default function BlogPage() {
                 </div>
               </Link>
             </article>
-          ))}
+            )
+          })}
         </div>
 
         {posts.length === 0 && (

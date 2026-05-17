@@ -46,6 +46,17 @@ export async function generateStaticParams() {
   }))
 }
 
+const getCategoryColor = (category: string) => {
+  const colors: Record<string, { bg: string; emoji: string }> = {
+    health: { bg: 'bg-red-500/20', emoji: '🏥' },
+    finance: { bg: 'bg-green-500/20', emoji: '💰' },
+    seo: { bg: 'bg-blue-500/20', emoji: '🔍' },
+    developer: { bg: 'bg-purple-500/20', emoji: '👨‍💻' },
+    converter: { bg: 'bg-orange-500/20', emoji: '🔄' },
+  }
+  return colors[category] || { bg: 'bg-slate-500/20', emoji: '📝' }
+}
+
 export default async function BlogDetailPage({ params }: BlogDetailPageProps) {
   const { slug } = await params
   const post = getBlogPost(slug)
@@ -68,6 +79,8 @@ export default async function BlogDetailPage({ params }: BlogDetailPageProps) {
     author: post.author,
     image: post.image,
   })
+
+  const categoryColor = getCategoryColor(post.category)
 
   return (
     <>
@@ -95,11 +108,9 @@ export default async function BlogDetailPage({ params }: BlogDetailPageProps) {
             </div>
           </header>
 
-          {post.image && (
-            <div className="mb-12 rounded-lg overflow-hidden">
-              <img src={post.image} alt={post.title} className="w-full h-96 object-cover" />
-            </div>
-          )}
+          <div className={`mb-12 rounded-lg overflow-hidden h-96 flex items-center justify-center ${categoryColor.bg}`}>
+            <span className="text-9xl">{categoryColor.emoji}</span>
+          </div>
 
           <div className="prose prose-invert max-w-none mb-12">
             {post.content.split('\n\n').map((paragraph, idx) => {
