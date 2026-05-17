@@ -20,7 +20,11 @@
       "Bash(nslookup www.microtoolshub.org)",
       "Bash(nslookup microtoolshub.org)",
       "Bash(curl -I https://www.microtoolshub.org)",
-      "Bash(git push *)"
+      "Bash(git push *)",
+      "mcp__a52c188e-41fa-4c73-9044-173e0a0a8708__list_teams",
+      "mcp__a52c188e-41fa-4c73-9044-173e0a0a8708__list_projects",
+      "mcp__a52c188e-41fa-4c73-9044-173e0a0a8708__list_deployments",
+      "mcp__a52c188e-41fa-4c73-9044-173e0a0a8708__web_fetch_vercel_url"
     ]
   }
 }
