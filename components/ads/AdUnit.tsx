@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from 'react'
 import { ADSENSE_CONFIG, isAdSenseConfigured } from '@/lib/adsense'
-import { getCountryFromHeaders, getGeoLocation, trackGeoPerformance, getAdFrequency } from '@/lib/geo-targeting'
+import { trackGeoPerformance } from '@/lib/geo-targeting'
 
 interface AdUnitProps {
   slotId?: string
@@ -20,7 +20,6 @@ export function AdUnit({
   minHeight = '100px',
 }: AdUnitProps) {
   const [shouldShow, setShouldShow] = useState(true)
-  const [geoTier, setGeoTier] = useState<string>('global')
 
   useEffect(() => {
     if (!isAdSenseConfigured()) {
@@ -28,42 +27,26 @@ export function AdUnit({
       return
     }
 
-    // Get user's country from headers (via API)
-    try {
-      fetch('/api/geo')
-        .then(res => res.json())
-        .then(data => {
-          const tier = data.tier || 'global'
-          setGeoTier(tier)
+    // Get user's country and load ad
+    fetch('/api/geo')
+      .then(res => res.json())
+      .then(data => {
+        const tier = data.tier || 'global'
 
-          // Determine ad frequency based on geo tier
-          const frequency = getAdFrequency(tier)
-          if (Math.random() > frequency) {
-            setShouldShow(false)
-            return
-          }
+        // Track geo performance
+        trackGeoPerformance(data.country || 'UNKNOWN', tier, slotId, false)
 
-          // Track geo performance
-          trackGeoPerformance(data.country || 'UNKNOWN', tier, slotId, false)
-
-          // Load ad
-          try {
-            ;(window.adsbygoogle = window.adsbygoogle || []).push({})
-          } catch (error) {
-            console.error('[AdSense] Error loading ad unit:', error)
-          }
-        })
-        .catch(() => {
-          // Fallback: load ad anyway
-          try {
-            ;(window.adsbygoogle = window.adsbygoogle || []).push({})
-          } catch (error) {
-            console.error('[AdSense] Error loading ad unit:', error)
-          }
-        })
-    } catch (error) {
-      console.error('[AdUnit] Geo-targeting error:', error)
-    }
+        // Load ad
+        if (window.adsbygoogle) {
+          window.adsbygoogle.push({})
+        }
+      })
+      .catch(() => {
+        // Fallback: still try to load ad
+        if (window.adsbygoogle) {
+          window.adsbygoogle.push({})
+        }
+      })
   }, [slotId])
 
   if (!isAdSenseConfigured() || !shouldShow) {
@@ -83,8 +66,7 @@ export function AdUnit({
         data-ad-client={publisherId}
         data-ad-slot={slotId}
         data-ad-format={format}
-        data-full-width-responsive={responsive}
-        data-ad-region={geoTier}
+        data-full-width-responsive={responsive ? 'true' : 'false'}
       />
     </div>
   )

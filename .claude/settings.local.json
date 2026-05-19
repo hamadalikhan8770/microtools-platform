@@ -29,7 +29,11 @@
       "Bash(curl -s \"https://api.vercel.com/v11/now/deployments?limit=1&projectId=prj_8G4e94d1ZcGZ9PyLzLFSmW6oVTn2&teamId=hamadalikhan8770-4205s-projects\")",
       "mcp__a52c188e-41fa-4c73-9044-173e0a0a8708__get_deployment",
       "mcp__Claude_in_Chrome__tabs_context_mcp",
-      "Bash(vercel --prod)"
+      "Bash(vercel --prod)",
+      "Bash(vercel env *)",
+      "Bash(curl -s https://www.microtoolshub.org)",
+      "mcp__Claude_in_Chrome__javascript_tool",
+      "Bash(vercel inspect *)"
     ]
   }
 }
