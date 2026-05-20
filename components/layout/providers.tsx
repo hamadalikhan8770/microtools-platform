@@ -1,8 +1,8 @@
 'use client'
 
 import { ThemeProvider } from '@/components/theme-provider'
-import { Header } from '@/components/layout/Header'
-import { Footer } from '@/components/layout/Footer'
+import { Header } from '@/components/layout/header'
+import { Footer } from '@/components/layout/footer'
 import { useExternalLinkTracking } from '@/lib/hooks/useExternalLinkTracking'
 
 function AnalyticsProvider({ children }: { children: React.ReactNode }) {
