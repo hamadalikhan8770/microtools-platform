@@ -1,99 +1,131 @@
 'use client'
 
 import { ResumeData } from '@/lib/resume-templates/types'
-import { Mail, Phone, MapPin, Briefcase, GraduationCap, Star } from 'lucide-react'
+import { Mail, Phone, Briefcase, GraduationCap, Star } from 'lucide-react'
 
 interface ModernTemplateProps {
   data: ResumeData
 }
 
 export function ModernTemplate({ data }: ModernTemplateProps) {
-  const sections = data.experience.split('\n').filter(Boolean)
-  const educations = data.education.split('\n').filter(Boolean)
+  const experienceEntries = data.experience.split('\n').filter(Boolean)
+  const educationEntries = data.education.split('\n').filter(Boolean)
   const skillsList = data.skills.split(',').map(s => s.trim()).filter(Boolean)
 
   return (
-    <div className="w-full max-w-4xl mx-auto bg-white text-gray-900 p-8 shadow-xl rounded-lg print:rounded-none print:shadow-none print:p-0 print:bg-white" id="resume-preview">
-      {/* Header with Accent Bar */}
-      <div className="flex gap-6 mb-8 pb-8 border-b-2 border-blue-600">
-        {/* Blue Accent Bar */}
-        <div className="w-1 bg-gradient-to-b from-blue-600 to-blue-400 rounded-full"></div>
+    <div
+      className="w-full mx-auto bg-white text-gray-900 print:shadow-none print:rounded-none"
+      style={{
+        maxWidth: '8.5in',
+        aspectRatio: '8.5 / 11',
+        padding: '0.75in',
+        margin: '0 auto',
+        boxShadow: '0 10px 40px rgba(0,0,0,0.1)',
+        borderRadius: '4px'
+      }}
+      id="resume-preview"
+    >
+      {/* Header Section */}
+      <div className="mb-6 pb-6 border-b-3 border-blue-600">
+        {/* Name */}
+        <h1 className="text-3xl font-bold text-gray-900 mb-1 tracking-tight">
+          {data.fullName || 'Your Name'}
+        </h1>
 
-        <div className="flex-1">
-          {/* Name */}
-          <h1 className="text-4xl font-bold text-gray-900 mb-1">{data.fullName || 'Your Name'}</h1>
-
-          {/* Contact Info */}
-          <div className="flex flex-wrap gap-4 text-sm text-gray-600 mb-4">
-            {data.email && (
-              <div className="flex items-center gap-1">
-                <Mail size={16} className="text-blue-600" />
-                <a href={`mailto:${data.email}`} className="hover:text-blue-600">{data.email}</a>
-              </div>
-            )}
-            {data.phone && (
-              <div className="flex items-center gap-1">
-                <Phone size={16} className="text-blue-600" />
-                <span>{data.phone}</span>
-              </div>
-            )}
-          </div>
-
-          {/* Professional Summary */}
-          {data.summary && (
-            <p className="text-gray-700 leading-relaxed text-sm line-clamp-3">
-              {data.summary}
-            </p>
+        {/* Contact Info - Professional Layout */}
+        <div className="flex flex-wrap gap-4 text-xs text-gray-600 mb-3">
+          {data.email && (
+            <a href={`mailto:${data.email}`} className="hover:text-blue-600 transition-colors font-medium">
+              {data.email}
+            </a>
+          )}
+          {data.phone && (
+            <span className="font-medium">{data.phone}</span>
           )}
         </div>
+
+        {/* Professional Summary - Constrained Height */}
+        {data.summary && (
+          <p className="text-gray-700 leading-snug text-sm">
+            {data.summary.substring(0, 250)}
+            {data.summary.length > 250 ? '...' : ''}
+          </p>
+        )}
       </div>
 
       {/* Experience Section */}
-      {sections.length > 0 && (
-        <div className="mb-8">
-          <div className="flex items-center gap-2 mb-4 pb-3 border-b border-gray-200">
-            <Briefcase size={20} className="text-blue-600" />
-            <h2 className="text-2xl font-bold text-gray-900">Experience</h2>
+      {experienceEntries.length > 0 && (
+        <div className="mb-5">
+          <div className="flex items-center gap-2 mb-3">
+            <Briefcase size={16} className="text-blue-600 flex-shrink-0" />
+            <h2 className="text-sm font-bold text-gray-900 uppercase tracking-wide">Professional Experience</h2>
           </div>
-          <div className="space-y-4">
-            {sections.map((section, idx) => (
-              <div key={idx} className="ml-6">
-                <p className="font-semibold text-gray-900 text-base">{section}</p>
-              </div>
-            ))}
+
+          <div className="space-y-3">
+            {experienceEntries.map((entry, idx) => {
+              // Parse: "Role at Company, Location | MM/YYYY - MM/YYYY" or just text
+              const parts = entry.split('|')
+              const roleCompany = parts[0]?.trim() || entry
+              const dates = parts[1]?.trim() || ''
+
+              return (
+                <div key={idx} className="pl-5 border-l-2 border-blue-200">
+                  {/* Role & Company */}
+                  <div className="font-semibold text-gray-900 text-sm mb-0.5">
+                    {roleCompany}
+                  </div>
+                  {/* Dates */}
+                  {dates && (
+                    <div className="text-xs text-gray-600 font-medium mb-1">
+                      {dates}
+                    </div>
+                  )}
+                  {/* Achievement bullet points are in the parsed data */}
+                </div>
+              )
+            })}
           </div>
         </div>
       )}
 
       {/* Education Section */}
-      {educations.length > 0 && (
-        <div className="mb-8">
-          <div className="flex items-center gap-2 mb-4 pb-3 border-b border-gray-200">
-            <GraduationCap size={20} className="text-blue-600" />
-            <h2 className="text-2xl font-bold text-gray-900">Education</h2>
+      {educationEntries.length > 0 && (
+        <div className="mb-5">
+          <div className="flex items-center gap-2 mb-3">
+            <GraduationCap size={16} className="text-blue-600 flex-shrink-0" />
+            <h2 className="text-sm font-bold text-gray-900 uppercase tracking-wide">Education</h2>
           </div>
-          <div className="space-y-3">
-            {educations.map((education, idx) => (
-              <div key={idx} className="ml-6">
-                <p className="font-semibold text-gray-900 text-base">{education}</p>
-              </div>
-            ))}
+
+          <div className="space-y-2">
+            {educationEntries.map((entry, idx) => {
+              const parts = entry.split('|')
+              const degree = parts[0]?.trim() || entry
+              const year = parts[1]?.trim() || ''
+
+              return (
+                <div key={idx} className="pl-5 border-l-2 border-blue-200">
+                  <div className="font-semibold text-gray-900 text-sm mb-0.5">{degree}</div>
+                  {year && <div className="text-xs text-gray-600">{year}</div>}
+                </div>
+              )
+            })}
           </div>
         </div>
       )}
 
       {/* Skills Section */}
       {skillsList.length > 0 && (
-        <div className="mb-8">
-          <div className="flex items-center gap-2 mb-4 pb-3 border-b border-gray-200">
-            <Star size={20} className="text-blue-600" />
-            <h2 className="text-2xl font-bold text-gray-900">Skills</h2>
+        <div className="mb-5">
+          <div className="flex items-center gap-2 mb-3">
+            <Star size={16} className="text-blue-600 flex-shrink-0" />
+            <h2 className="text-sm font-bold text-gray-900 uppercase tracking-wide">Core Skills</h2>
           </div>
-          <div className="flex flex-wrap gap-2 ml-6">
+
+          <div className="flex flex-wrap gap-2">
             {skillsList.map((skill, idx) => (
               <span
                 key={idx}
-                className="inline-block px-3 py-1.5 bg-blue-50 text-blue-700 rounded-full text-sm font-medium border border-blue-200"
+                className="inline-block px-2.5 py-1.5 bg-blue-50 text-blue-700 rounded text-xs font-semibold border border-blue-200 hover:bg-blue-100 transition-colors"
               >
                 {skill}
               </span>
@@ -102,9 +134,9 @@ export function ModernTemplate({ data }: ModernTemplateProps) {
         </div>
       )}
 
-      {/* Footer */}
-      <div className="mt-8 pt-6 border-t border-gray-200 text-center text-xs text-gray-500">
-        <p>Professional Resume | Generated with MicroTools Resume Builder</p>
+      {/* Footer - Minimal */}
+      <div className="mt-4 pt-3 border-t border-gray-200 text-center text-xs text-gray-400">
+        <p>Professional Resume</p>
       </div>
     </div>
   )
