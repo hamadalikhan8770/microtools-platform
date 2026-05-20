@@ -100,8 +100,11 @@ async function generateWithGroq(prompt: string): Promise<string> {
 
 function buildPrompt(toolType: string, formData: any): string {
   switch (toolType) {
-    case 'resume':
-      return `Generate a professional, ATS-friendly resume based on this information:
+    case 'resume': {
+      const template = formData.selectedTemplate || 'modern'
+
+      if (template === 'modern') {
+        return `Generate a professional, achievement-focused resume based on this information:
 
 Full Name: ${formData.fullName}
 Email: ${formData.email}
@@ -111,13 +114,66 @@ Work Experience: ${formData.experience || 'Not provided'}
 Education: ${formData.education || 'Not provided'}
 Skills: ${formData.skills || 'Not provided'}
 
-Instructions:
-- Format as clean, ATS-friendly markdown
-- Include clear sections with headers
-- Use action verbs (Led, Designed, Managed, etc.)
-- Include dates for all positions
-- Make it professional and concise
-- Optimize for applicant tracking systems`
+Instructions for MODERN PROFESSIONAL template:
+- Create achievement-focused bullet points
+- Use strong action verbs (Led, Designed, Managed, Increased, Improved, etc.)
+- Quantify results where possible (e.g., "Increased sales by 25%")
+- Keep each bullet point to 1-2 lines
+- Include dates for all positions (format: MM/YYYY - MM/YYYY)
+- Format each section clearly
+- Make accomplishments prominent
+- Professional tone, modern language
+- ATS-friendly formatting
+
+Return ONLY the enhanced content for each section, without markdown symbols.`
+      } else if (template === 'minimal') {
+        return `Generate a concise, elegantly-worded resume based on this information:
+
+Full Name: ${formData.fullName}
+Email: ${formData.email}
+Phone: ${formData.phone}
+Professional Summary: ${formData.summary || 'Not provided'}
+Work Experience: ${formData.experience || 'Not provided'}
+Education: ${formData.education || 'Not provided'}
+Skills: ${formData.skills || 'Not provided'}
+
+Instructions for MINIMAL ELEGANT template:
+- Use elegant, sophisticated language
+- Focus on key accomplishments
+- Keep descriptions concise (1 line per item)
+- Include dates in parentheses format
+- Emphasize quality over quantity
+- Professional, timeless tone
+- Minimize adjectives, use nouns and verbs
+- Clean, refined presentation
+
+Return ONLY the enhanced content for each section.`
+      } else {
+        // ATS-Optimized
+        return `Generate a plain-text, ATS-optimized resume based on this information:
+
+Full Name: ${formData.fullName}
+Email: ${formData.email}
+Phone: ${formData.phone}
+Professional Summary: ${formData.summary || 'Not provided'}
+Work Experience: ${formData.experience || 'Not provided'}
+Education: ${formData.education || 'Not provided'}
+Skills: ${formData.skills || 'Not provided'}
+
+Instructions for ATS-OPTIMIZED template:
+- Use simple, clear language without special characters
+- Include relevant keywords naturally
+- Use standard section names (Professional Summary, Experience, Education, Skills)
+- Keep formatting plain and simple
+- One item per line
+- Include dates in standard format (MM/YYYY)
+- Avoid graphics, symbols, and special formatting
+- Focus on content that ATS systems can parse
+- Professional, straightforward tone
+
+Return ONLY the plain-text content without any markdown or special formatting.`
+      }
+    }
 
     case 'proposal':
       return `Generate a professional business proposal based on this information:
