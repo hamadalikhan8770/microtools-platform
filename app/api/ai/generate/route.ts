@@ -104,8 +104,9 @@ function buildPrompt(toolType: string, formData: any): string {
       const template = formData.selectedTemplate || 'modern'
 
       if (template === 'modern') {
-        return `Generate a professional, achievement-focused resume based on this information:
+        return `You are a professional resume writer. Generate a compelling, achievement-focused resume for a talented professional.
 
+INPUT DATA:
 Full Name: ${formData.fullName}
 Email: ${formData.email}
 Phone: ${formData.phone}
@@ -114,21 +115,58 @@ Work Experience: ${formData.experience || 'Not provided'}
 Education: ${formData.education || 'Not provided'}
 Skills: ${formData.skills || 'Not provided'}
 
-Instructions for MODERN PROFESSIONAL template:
-- Create achievement-focused bullet points
-- Use strong action verbs (Led, Designed, Managed, Increased, Improved, etc.)
-- Quantify results where possible (e.g., "Increased sales by 25%")
-- Keep each bullet point to 1-2 lines
-- Include dates for all positions (format: MM/YYYY - MM/YYYY)
-- Format each section clearly
-- Make accomplishments prominent
-- Professional tone, modern language
-- ATS-friendly formatting
+TASK: Enhance this resume content to be recruiter-ready and impressive.
 
-Return ONLY the enhanced content for each section, without markdown symbols.`
+CRITICAL INSTRUCTIONS:
+
+1. PROFESSIONAL SUMMARY:
+   - Write 2-3 punchy sentences that immediately establish credibility
+   - Focus on unique value proposition and key strengths
+   - Show personality while remaining professional
+   - Avoid generic phrases like "hardworking" or "dedicated"
+
+2. WORK EXPERIENCE - FORMAT & CONTENT:
+   - Format EACH job entry exactly as: "Job Title at Company, City | MM/YYYY - MM/YYYY"
+   - Include 3-4 achievement bullets per role (NOT generic duties)
+   - Lead with strong action verbs: Led, Architected, Spearheaded, Transformed, Accelerated, Optimized, etc.
+   - QUANTIFY all results when possible (%, numbers, $, time saved)
+   - Use specific business metrics and outcomes
+   - Show impact on team, company, and customers
+   - Example format:
+     "Senior Product Manager at TechCorp, San Francisco | 01/2020 - 06/2023
+     - Spearheaded product redesign that increased user retention by 34% (250K users)
+     - Led cross-functional team of 12 (engineering, design, marketing)
+     - Accelerated feature delivery by 40% through Agile optimization"
+
+3. EDUCATION - FORMAT:
+   - Format as: "Degree Name, University Name | Graduation Year"
+   - Include relevant honors, GPA (if 3.5+), or notable achievements
+   - Example: "BS Computer Science, Stanford University | 2018 (Magna Cum Laude)"
+
+4. SKILLS:
+   - List only TRUE expertise areas (skills person actually has)
+   - Prioritize by relevance to industry/role
+   - Mix technical and soft skills
+   - Keep to 10-15 most impactful skills
+
+5. TONE & LANGUAGE:
+   - Professional but not stuffy
+   - Human-readable, NOT robotic
+   - Confident without being arrogant
+   - Specific and concrete (avoid vague language)
+   - Recruiter-friendly and ATS-compatible
+
+OUTPUT FORMAT:
+- For each section (Summary, Experience, Education, Skills), provide ONLY the enhanced content
+- NO markdown, NO bullet point symbols
+- Use pipe symbol (|) to separate job title|company|dates
+- Make content directly copy-paste ready
+
+Return only the enhanced resume content. Do NOT include section headers.`
       } else if (template === 'minimal') {
-        return `Generate a concise, elegantly-worded resume based on this information:
+        return `You are a professional resume writer specializing in elegant, minimal designs.
 
+INPUT DATA:
 Full Name: ${formData.fullName}
 Email: ${formData.email}
 Phone: ${formData.phone}
@@ -137,21 +175,61 @@ Work Experience: ${formData.experience || 'Not provided'}
 Education: ${formData.education || 'Not provided'}
 Skills: ${formData.skills || 'Not provided'}
 
-Instructions for MINIMAL ELEGANT template:
-- Use elegant, sophisticated language
-- Focus on key accomplishments
-- Keep descriptions concise (1 line per item)
-- Include dates in parentheses format
-- Emphasize quality over quantity
-- Professional, timeless tone
-- Minimize adjectives, use nouns and verbs
-- Clean, refined presentation
+TASK: Create a refined, elegant resume that emphasizes quality over quantity.
 
-Return ONLY the enhanced content for each section.`
+CRITICAL INSTRUCTIONS:
+
+1. TONE:
+   - Sophisticated and refined
+   - Confidently understated
+   - Editorial quality writing
+   - Show wisdom through restraint
+
+2. PROFESSIONAL SUMMARY:
+   - Single elegant paragraph (3 sentences max)
+   - Establish unique positioning
+   - Emphasize depth and impact
+   - Avoid superlatives
+
+3. WORK EXPERIENCE - FORMAT & CONTENT:
+   - Format as: "Role at Company, City | From-To (dates)"
+   - Include 2-3 key achievements per role
+   - Use refined action verbs: Directed, Cultivated, Enhanced, Established, etc.
+   - Include meaningful metrics but keep descriptions concise
+   - Example:
+     "Director of Strategy at Global Corp, New York | 2019-2023
+     Enhanced operational efficiency through systematic process redesign
+     Managed $50M budget across international teams"
+
+4. EDUCATION:
+   - Format: "Degree, University | Year"
+   - Include honors only if prestigious
+   - Example: "MBA, Harvard Business School | 2015"
+
+5. SKILLS:
+   - 8-12 carefully selected skills
+   - Grouped by relevance
+   - Present as elegant list
+
+6. LANGUAGE RULES:
+   - Use sophisticated vocabulary (but remain accessible)
+   - Active voice, strong verbs
+   - Minimize adjectives
+   - Let accomplishments speak for themselves
+   - Avoid buzzwords
+
+OUTPUT FORMAT:
+- Provide only the enhanced content (no headers)
+- Use pipe symbol (|) to separate information
+- Content should be refined and ready to use
+- No markdown or symbols
+
+Return only the polished resume content.`
       } else {
         // ATS-Optimized
-        return `Generate a plain-text, ATS-optimized resume based on this information:
+        return `You are an ATS (Applicant Tracking System) optimization expert. Create a keyword-rich, machine-friendly resume.
 
+INPUT DATA:
 Full Name: ${formData.fullName}
 Email: ${formData.email}
 Phone: ${formData.phone}
@@ -160,18 +238,60 @@ Work Experience: ${formData.experience || 'Not provided'}
 Education: ${formData.education || 'Not provided'}
 Skills: ${formData.skills || 'Not provided'}
 
-Instructions for ATS-OPTIMIZED template:
-- Use simple, clear language without special characters
-- Include relevant keywords naturally
-- Use standard section names (Professional Summary, Experience, Education, Skills)
-- Keep formatting plain and simple
-- One item per line
-- Include dates in standard format (MM/YYYY)
-- Avoid graphics, symbols, and special formatting
-- Focus on content that ATS systems can parse
-- Professional, straightforward tone
+TASK: Optimize this resume for ATS parsing while maintaining readability and impact.
 
-Return ONLY the plain-text content without any markdown or special formatting.`
+CRITICAL INSTRUCTIONS:
+
+1. PROFESSIONAL SUMMARY:
+   - 3-4 sentences maximum
+   - Include key industry terms and skills
+   - Quantify experience when possible
+   - Clear, direct language
+
+2. WORK EXPERIENCE - FORMAT & CONTENT:
+   - Format each role as: "Job Title at Company, City | MM/YYYY - MM/YYYY"
+   - Include 3-5 achievement statements per role
+   - Lead with relevant action verbs
+   - Include quantifiable results
+   - Use industry keywords naturally
+   - Example format:
+     "Senior Software Engineer at TechCorp, San Francisco | 01/2019 - 12/2022
+     Engineered microservices architecture using Java and Kubernetes
+     Increased system performance by 45% reducing API latency from 500ms to 275ms
+     Led team of 4 engineers on mission-critical payment system"
+
+3. EDUCATION:
+   - Format: "Degree, Institution, Year"
+   - Include relevant certifications
+   - Include GPA if 3.5 or higher
+
+4. SKILLS:
+   - Organize by category if possible (Technical Skills, Leadership, etc.)
+   - Use industry-standard terminology
+   - Include both technical and soft skills
+   - Use pipe separators: "Skill1 • Skill2 • Skill3"
+
+5. ATS OPTIMIZATION:
+   - Use standard section headers: PROFESSIONAL SUMMARY, PROFESSIONAL EXPERIENCE, EDUCATION, TECHNICAL SKILLS
+   - No special characters or formatting
+   - Plain text, easy to parse
+   - Keywords appear naturally in context
+   - Avoid graphics, tables, or special symbols
+
+6. LANGUAGE:
+   - Professional and direct
+   - Industry-standard terminology
+   - Measurable outcomes
+   - Clear and scannable
+
+OUTPUT FORMAT:
+- Provide only the enhanced content
+- Use pipe (|) to separate information
+- Use bullet points or line breaks for clarity
+- Machine-readable and human-readable
+- No markdown symbols
+
+Return only the ATS-optimized resume content.`
       }
     }
 
