@@ -28,6 +28,9 @@ export function Header() {
           <Link href="/tools" className="text-sm hover:text-primary transition-colors">
             Tools
           </Link>
+          <Link href="/ai-tools" className="text-sm hover:text-primary transition-colors font-semibold text-primary">
+            AI Tools ✨
+          </Link>
           <Link href="/blog" className="text-sm hover:text-primary transition-colors">
             Blog
           </Link>
@@ -80,6 +83,9 @@ export function Header() {
             </Link>
             <Link href="/tools" className="text-sm hover:text-primary transition-colors" onClick={() => setIsOpen(false)}>
               Tools
+            </Link>
+            <Link href="/ai-tools" className="text-sm hover:text-primary transition-colors font-semibold text-primary" onClick={() => setIsOpen(false)}>
+              AI Tools ✨
             </Link>
             <Link href="/blog" className="text-sm hover:text-primary transition-colors" onClick={() => setIsOpen(false)}>
               Blog
