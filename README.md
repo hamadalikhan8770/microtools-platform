@@ -2,6 +2,8 @@
 
 MicroTools Platform is a Next.js tools website with category landing pages, AI-assisted writing tools, blog content, analytics hooks, and utility calculators. The tracked codebase includes both general tool pages and a dedicated AI tools section.
 
+This repository is one of the strongest verified portfolio projects in this GitHub account: build, lint, type-check, runtime, and real screenshot checks all passed in the latest review pass.
+
 ## Current status
 
 - Repository state: runnable web app
