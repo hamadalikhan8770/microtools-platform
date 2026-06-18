@@ -7,6 +7,9 @@ MicroTools Platform is a Next.js tools website with category landing pages, AI-a
 - Repository state: runnable web app
 - Product focus: general utility platform with health, finance, converter, SEO, developer, and AI tools
 - Build status from this audit: Passed (`npm run build`)
+- Lint status from this audit: Passed (`npm run lint`)
+- Type-check status from this audit: Passed (`npm run type-check`)
+- Runtime status from this audit: Passed on `http://127.0.0.1:3012`
 - Screenshot status: Real screenshots added from the running app
 
 ## Verified features from code
@@ -56,8 +59,18 @@ MicroTools Platform is a Next.js tools website with category landing pages, AI-a
 ```powershell
 npm install
 Copy-Item .env.example .env.local
+npm run lint
+npm run type-check
 npm run build
 npm run start -- --hostname 127.0.0.1 --port 3000
+```
+
+The public site runs without secrets. Real values are only needed for live integrations:
+
+```env
+ANTHROPIC_API_KEY=YOUR_ANTHROPIC_API_KEY
+NEXT_PUBLIC_GA_ID=G-XXXXXXXXXX
+NEXT_PUBLIC_ADSENSE_ID=ca-pub-xxxxxxxxxxxxxxxx
 ```
 
 ## Testing

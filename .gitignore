@@ -20,6 +20,7 @@ coverage
 *.swp
 *.swo
 *~
+*.tsbuildinfo
 
 .vercel
 

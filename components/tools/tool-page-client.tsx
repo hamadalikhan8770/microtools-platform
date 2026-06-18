@@ -29,7 +29,7 @@ export function ToolPageClient({ tool, category, onCalculate }: ToolPageClientPr
 
   useEffect(() => {
     trackToolUsage(tool.name, category.name, Object.keys(inputs).length)
-  }, [tool.name, category.name])
+  }, [tool.name, category.name, inputs])
 
   const handleInputChange = (name: string, value: any) => {
     setInputs(prev => ({ ...prev, [name]: value }))

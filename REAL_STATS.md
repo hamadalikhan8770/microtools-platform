@@ -23,6 +23,9 @@
 ## Build and runtime status
 
 - `npm install`: Passed
+- `npm run lint`: Passed
+- `npm run type-check`: Passed
 - `npm run build`: Passed
-- Local server start: Passed on `http://127.0.0.1:3002`
+- Local server start: Passed on `http://127.0.0.1:3012`
+- Route checks: Passed for `/`, `/tools`, `/tools/health`, `/ai-tools`, `/ai-tools/resume-generator`
 - AI generation with live keys: Not verified yet
